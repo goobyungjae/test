@@ -17,7 +17,7 @@ public class TestBoardDAO extends EgovComAbstractDAO {
 	}
 
 	public EgovMap selectTestBoardDetail(TestBoardVO vo) {
-		return (EgovMap)selectOne("TestBoard.selectBoardDetail", vo);
+		return (EgovMap)selectOne("TestBoard.selectTestBoardDetail", vo);
 	}
 
 	public void insertTestBoard(TestBoardVO vo) {
@@ -36,9 +36,9 @@ public class TestBoardDAO extends EgovComAbstractDAO {
 		delete("TestBoard.deleteTestBoard", vo);
 	}
 
-	public List<TestCommentVO> selectTestCommentList(TestCommentVO testCommentVo) {
-		return (List<TestCommentVO>) list("TestBoard.selectTestCommentList", testCommentVo);
-	}
+//	public List<TestCommentVO> selectTestCommentList(TestCommentVO testCommentVo) {
+//		return (List<TestCommentVO>) list("TestBoard.selectTestCommentList", testCommentVo);
+//	}
 
 	public void insertTestComment(TestCommentVO testCommentVo) {
 		insert("TestBoard.insertTestComment", testCommentVo);		

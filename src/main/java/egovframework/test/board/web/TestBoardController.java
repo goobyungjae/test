@@ -42,8 +42,8 @@ public class TestBoardController {
 	public String selectTestBoardDetail(HttpServletRequest request, @ModelAttribute("testBoardVO") TestBoardVO vo, @ModelAttribute("testCommentVO") TestCommentVO testCommentVo, ModelMap model) throws Exception {
 		EgovMap testBoardDetail = testBoardService.selectTestBoardDetail(vo);
 		model.addAttribute("testBoardDetail", testBoardDetail);
-		List<TestCommentVO> testCommentList = testBoardService.selectTestCommentList(testCommentVo);
-		model.addAttribute("testCommentList", testCommentList);
+//		List<TestCommentVO> testCommentList = testBoardService.selectTestCommentList(testCommentVo);
+//		model.addAttribute("testCommentList", testCommentList);
 		return "egovframework/test/board/testBoardDetail";
 	}
 

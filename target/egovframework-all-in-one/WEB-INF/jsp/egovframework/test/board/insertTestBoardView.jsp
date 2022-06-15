@@ -44,9 +44,6 @@
 			<form id="testForm" name="testForm" method="post" enctype="multipart/form-data">
 				<table>
 					<tbody>
-						<select>
-							<option>게시글 메뉴</option>
-						</select>
 						<tr>
 							<td><input placeholder="제목"></td>
 						</tr>
@@ -57,12 +54,12 @@
 						<tr>
 							<td>첨부파일 목록</td>
 						</tr>
-						<tr>
+<!-- 						<tr>
 							<td><input type="file" id="fileUpload" multiple></td>
 						</tr>
 						<tr>
 							<td><div id="fileUploadList">여기에 `리스트를 쭉 뿌려줄거야</div></td>
-						</tr>
+						</tr> -->
 
 					</tbody>
 				</table>

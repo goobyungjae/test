@@ -4,15 +4,15 @@
 
 	<select id="selectTestBoardList" parameterType="egovframework.test.board.service.TestBoardVO" resultType="egovMap">
 		SELECT
-			BOARD_ID
+			tb.BOARD_ID
 			, BOARD_TITLE
 			, BOARD_CONTENTS
 			, BOARD_WRITER_ID
 			, BOARD_WRITER_NAME
 			, BOARD_REG
-			, (SELECT COUNT(*) FROM TESTCOMMENT WHERE BOARD_ID = #{boardId}) AS COMMENT_IN_BOARD_COUNT
+			, (SELECT COUNT(*) FROM TESTCOMMENT tc WHERE tc.BOARD_ID = tb.BOARD_ID) AS COMMENT_IN_BOARD_COUNT
 		FROM
-			TESTBOARD
+			TESTBOARD tb
 		ORDER BY
 			BOARD_ID
 	</select>

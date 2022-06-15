@@ -17,7 +17,7 @@
 			BOARD_ID
 	</select>
 
- 	<select id="selectBoardDetail" parameterType="egovframework.test.board.service.TestBoardVO" resultType="egovMap">
+ 	<select id="selectTestBoardDetail" parameterType="egovframework.test.board.service.TestBoardVO" resultType="egovMap">
 		SELECT
 			BOARD_ID
 			, BOARD_TITLE

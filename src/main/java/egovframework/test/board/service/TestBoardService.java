@@ -24,7 +24,7 @@ public interface TestBoardService {
 
 	/* ------------------------------------------------ 댓글 ------------------------------------------------ */
 	//
-	List<TestCommentVO> selectTestCommentList(TestCommentVO testCommentVo);
+//	List<TestCommentVO> selectTestCommentList(TestCommentVO testCommentVo);
 
 	//
 	void insertTestComment(TestCommentVO testCommentVo);

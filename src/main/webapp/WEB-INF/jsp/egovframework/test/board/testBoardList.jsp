@@ -45,11 +45,17 @@
 						<tr>
 							<td><c:out value="${testBoardList.boardId}" /></td>
 							<td></td>
-							<td><c:out value="${testBoardList.boardTitle}" /> [<c:out value="${testBoardList.commentInBoardCount}" />]</td>
+							<td>
+								<c:url value='/test/board/selectTestBoardDetail.do' var="boardDetailUrl">
+								<c:param name="boardId" value="${testBoardList.boardId}"/></c:url>
+								<a href="${boardDetailUrl}"><c:out value="${testBoardList.boardTitle}" /></a>
+								[ <c:out value="${testBoardList.commentInBoardCount}" /> ]
+							</td>
 							<td><c:out value="${testBoardList.boardWriterId}" /></td>
 							<td><c:out value="${testBoardList.boardWriterName}" /></td>
 						</tr>
 					</c:forEach>
+					
 					<c:if test="${fn:length(testBoardList) == 0}">
 						<tr>
 							<td>등록된 게시글이 없습니다.</td>
