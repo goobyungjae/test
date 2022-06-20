@@ -66,7 +66,7 @@
 
 			<div>
 				<div>
-					<a href="/test/board/insertTestBoardView.do"><span>게시글 등록</span></a>						
+					<a href="/test/board/insertTestBoardView.do"><span>게시글 등록하기</span></a>						
 				</div>
 			</div>
 		</div>

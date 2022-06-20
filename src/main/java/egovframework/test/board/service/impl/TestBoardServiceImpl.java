@@ -43,10 +43,10 @@ public class TestBoardServiceImpl implements TestBoardService {
 		testBoardDao.deleteTestBoard(vo);
 	}
 
-//	@Override
-//	public List<TestCommentVO> selectTestCommentList(TestCommentVO testCommentVo) {
-//		return testBoardDao.selectTestCommentList(testCommentVo);
-//	}
+	@Override
+	public List<TestCommentVO> selectTestCommentList(TestCommentVO testCommentVo) {
+		return testBoardDao.selectTestCommentList(testCommentVo);
+	}
 
 	@Override
 	public void insertTestComment(TestCommentVO testCommentVo) {

@@ -18,7 +18,7 @@
 		</div>
 	
 		<div>
-			<h3>테스트 게시판</h3>
+			<h3>테스트 상세페이지</h3>
 		</div>
 
 		<div>
@@ -44,17 +44,35 @@
 						<tr>
 							<td><c:out value="${testBoardDetail.boardId}" /></td>
 							<td></td>
-							<%-- <td><c:out value="${testBoardDetail.boardTitle}" /> </td>
+							<td><c:out value="${testBoardDetail.boardTitle}" /> </td>
 							<td><c:out value="${testBoardDetail.boardWriterId}" /></td>
-							<td><c:out value="${testBoardDetail.boardWriterName}" /></td> --%>
+							<td><c:out value="${testBoardDetail.boardWriterName}" /></td>
 						</tr>
 				</tbody>
 			</table>
 
 			<div>
+				<c:forEach items="${testCommentList}" var="testCommentList">
 				<div>
-					<a href="/test/board/insertTestBoardView.do"><span>게시글 등록</span></a>						
+					<c:out value="${testCommentList.commentId}" />
+					<c:out value="${testCommentList.commentWriterId}" />
+					<c:out value="${testCommentList.commentWriterName}" />
+					<c:out value="${testCommentList.commentContents}" />
+					<c:out value="${testCommentList.commentReg}" />
 				</div>
+				</c:forEach>
+			</div>
+
+			<div>
+				<span>
+					<a href="/test/board/updateTestBoard.do"><span>게시글 수정하기</span></a>						
+				</span>
+				<span>
+					<a href="/test/board/deleteTestBoard.do"><span>게시글 삭제하기</span></a>						
+				</span>
+				<span>
+					<a href="/test/board/selectTestBoardList.do"><span>게시핀 목록</span></a>						
+				</span>
 			</div>
 		</div>
 	</div>

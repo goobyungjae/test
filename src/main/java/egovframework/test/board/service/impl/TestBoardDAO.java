@@ -36,9 +36,9 @@ public class TestBoardDAO extends EgovComAbstractDAO {
 		delete("TestBoard.deleteTestBoard", vo);
 	}
 
-//	public List<TestCommentVO> selectTestCommentList(TestCommentVO testCommentVo) {
-//		return (List<TestCommentVO>) list("TestBoard.selectTestCommentList", testCommentVo);
-//	}
+	public List<TestCommentVO> selectTestCommentList(TestCommentVO testCommentVo) {
+		return (List<TestCommentVO>) list("TestBoard.selectTestCommentList", testCommentVo);
+	}
 
 	public void insertTestComment(TestCommentVO testCommentVo) {
 		insert("TestBoard.insertTestComment", testCommentVo);		
