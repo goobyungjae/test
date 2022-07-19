@@ -12,6 +12,9 @@
 <title></title>
 </head>
 <body>
+	<form name="bdForm" method="post">
+		<input type="hidden" value="${testBoardDetail.boardId}"  name="boardId">
+	</form>
 	<div>
 		<div>
 			<h1>테스트</h1>
@@ -22,59 +25,65 @@
 		</div>
 
 		<div>
-			<table style="width: 100%; border: 2px solid #444444;">
-				<colgroup>
-					<col style="width: 5%;">
-					<col style="width: 5%;">
-					<col style="width: 15%;">
-					<col style="width: 10%;">
-					<col style="width: 10%;">
-				</colgroup>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>이미지</th>
-						<th>제목</th>
-						<th>작성자 아이디</th>
-						<th>작성자 이름</th>
-					</tr>
-				</thead>
-
-				<tbody style="text-align: center;">
-						<tr>
-							<td><c:out value="${testBoardDetail.boardId}" /></td>
-							<td></td>
-							<td><c:out value="${testBoardDetail.boardTitle}" /> </td>
-							<td><c:out value="${testBoardDetail.boardWriterId}" /></td>
-							<td><c:out value="${testBoardDetail.boardWriterName}" /></td>
-						</tr>
-				</tbody>
-			</table>
-
 			<div>
+				<span><c:out value="${testBoardDetail.boardTitle}" /></span>
+				<span><c:out value="${testBoardDetail.boardReg}" /></span>
+			</div>
+			<div>
+				<span><c:out value="${testBoardDetail.boardWriterName}" /></span>
+				<span>조회수 <c:out value="${testBoardDetail.boardViews}"/></span>
+				<span>추천수</span>
+				<span>댓글 <c:out value="${commentCnt}"/></span>
+			</div>
+			<div>	
+				<div><c:out value="${testBoardDetail.boardContents}" /></div>
+				<div>추천</div>
+			</div>
+			
+			<div>
+				<h3>댓글 <c:out value="${commentCnt}"/>개</h3>
 				<c:forEach items="${testCommentList}" var="testCommentList">
-				<div>
-					<c:out value="${testCommentList.commentId}" />
-					<c:out value="${testCommentList.commentWriterId}" />
-					<c:out value="${testCommentList.commentWriterName}" />
-					<c:out value="${testCommentList.commentContents}" />
-					<c:out value="${testCommentList.commentReg}" />
-				</div>
+					<div>
+						<div>
+							<span><c:out value="${testCommentList.commentWriterName}" /></span>
+							<span><c:out value="${testCommentList.commentReg}"/></span>
+							<span><a href="">변경</a></span>
+							<span><a href="">삭제</a></span>
+						</div>
+						
+						<div><c:out value="${testCommentList.commentContents}" /></div>
+					</div>
 				</c:forEach>
 			</div>
 
 			<div>
+				<div>
+					<a href="javascript:fnRegist();"><span>좋아요</span></a>
+				</div>
+			
 				<span>
-					<a href="/test/board/updateTestBoard.do"><span>게시글 수정하기</span></a>						
-				</span>
-				<span>
-					<a href="/test/board/deleteTestBoard.do"><span>게시글 삭제하기</span></a>						
-				</span>
-				<span>
-					<a href="/test/board/selectTestBoardList.do"><span>게시핀 목록</span></a>						
+					<a href="/test/board/selectTestBoardList.do">게시판 목록</a>						
 				</span>
 			</div>
 		</div>
 	</div>
+	
+<script>
+	function fnRegist() {
+		if(confirm("등록 하시겠습니까?")){
+			
+			$.ajax({
+				url : '<c:url value="/test/board/inserTestBoardCommend.do"/>',
+				type : 'post',
+				dataType: "json",
+				data :$("form[name=bdForm]").serialize(),
+				success : function(result) {
+					alert("성공");
+				}
+			});
+		}
+	}
+</script>
+
 </body>
 </html>

@@ -8,7 +8,10 @@ public interface TestBoardService {
 
 	/* ------------------------------------------------ 게시판 ------------------------------------------------ */
 	// 
-	List<TestBoardVO> selectTestBoardList(TestBoardVO vo);
+	List<TestBoardVO> selectTestBoardList();
+	
+	//
+	int selectTestBoardCnt();
 	
 	//
 	EgovMap selectTestBoardDetail(TestBoardVO vo);
@@ -34,4 +37,13 @@ public interface TestBoardService {
 
 	//
 	void deleteTestComment(TestCommentVO testCommentVo);
+	
+	//
+	int selectTestCommentCnt(TestCommentVO testCommentVo);
+
+	void updateTestBoardViews(TestBoardVO vo);
+
+	List<TestBoardCommendVO> selectCheckTestBoardCommend(TestBoardCommendVO testBoardCommendVO);
+
+	void insertTestBoardCommend(TestBoardCommendVO testBoardCommendVO);
 }

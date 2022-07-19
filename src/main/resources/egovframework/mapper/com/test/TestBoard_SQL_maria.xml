@@ -11,11 +11,20 @@
 			, BOARD_WRITER_ID
 			, BOARD_WRITER_NAME
 			, BOARD_REG
+			, BOARD_VIEWS
 			, (SELECT COUNT(*) FROM TESTCOMMENT tc WHERE tc.BOARD_ID = tb.BOARD_ID) AS COMMENT_IN_BOARD_COUNT
 		FROM
 			TESTBOARD tb
 		ORDER BY
 			BOARD_ID
+	</select>
+
+<!--  -->
+	<select id="selectTestBoardCnt" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			TESTBOARD
 	</select>
 
 <!--  -->
@@ -27,11 +36,22 @@
 			, BOARD_WRITER_ID
 			, BOARD_WRITER_NAME
 			, BOARD_REG
+			, BOARD_VIEWS
 		FROM
 			TESTBOARD
 		WHERE
 			BOARD_ID = #{boardId}
 	</select>
+	
+<!--  -->	
+	<update id="updateTestBoardViews" parameterType="egovframework.test.board.service.TestBoardVO">
+		UPDATE
+			TESTBOARD
+		SET
+			BOARD_VIEWS = BOARD_VIEWS + 1
+		WHERE
+			BOARD_ID = #{boardId}
+	</update>
 	
 <!--  -->
 	<select id="selectTestCommentList" parameterType="egovframework.test.board.service.TestCommentVO" resultType="egovMap">
@@ -47,6 +67,16 @@
 			BOARD_ID = #{boardId}
 		ORDER BY
 			COMMENT_ID
+	</select>
+	
+<!--  -->	
+	<select id="selectTestCommentCnt" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			TESTCOMMENT
+		WHERE
+			BOARD_ID=#{boardId}
 	</select>
 	
 <!--  -->
@@ -70,6 +100,7 @@
 		UPDATE 
 			TESTBOARD
 		SET 
+			BOARD_TITLE = #{boardTitle}
 			BOARD_CONTENTS = #{boardContents}
 		WHERE
 			BOARD_ID = #{board_id}
@@ -131,5 +162,4 @@
 		AND
 			COMMENT_WRITER_ID = #{commentWriterId}
 	</delete>
-
 </mapper>

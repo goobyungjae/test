@@ -10,6 +10,8 @@ public class TestBoardVO {
 	private String boardWriterId;
 	private String boardWriterName;
 	private Date boardReg;
+	private int boardViews;
+	
 	private int commentInBoardCount;
 
 	public int getBoardId() {
@@ -66,4 +68,13 @@ public class TestBoardVO {
 	public void setCommentInBoardCount(int commentInBoardCount) {
 		this.commentInBoardCount = commentInBoardCount;
 	}
+
+	public int getBoardViews() {
+		return boardViews;
+	}
+
+	public void setBoardViews(int boardViews) {
+		this.boardViews = boardViews;
+	}
+
 }

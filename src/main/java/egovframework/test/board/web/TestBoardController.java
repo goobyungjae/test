@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
+import egovframework.test.board.service.TestBoardCommendVO;
 import egovframework.test.board.service.TestBoardService;
 import egovframework.test.board.service.TestBoardVO;
 import egovframework.test.board.service.TestCommentVO;
@@ -26,23 +27,28 @@ public class TestBoardController {
 	private TestBoardService testBoardService;
 	
 	
-/* ------------------------------------------------ 게시판 ------------------------------------------------ */
-	
-	
+	/* 게시판 */
 	// 게시판 불러오기
 	@RequestMapping(value="/test/board/selectTestBoardList.do", method=RequestMethod.GET)
 	public String selectTestBoardList(HttpServletRequest request, @ModelAttribute("testBoardVO") TestBoardVO vo, ModelMap model) throws Exception {
-		List<TestBoardVO> testBoardList = testBoardService.selectTestBoardList(vo);
+		// 게시글 총 개수
+		int testBoardCnt = testBoardService.selectTestBoardCnt();
+		List<TestBoardVO> testBoardList = testBoardService.selectTestBoardList();
 		model.addAttribute("testBoardList", testBoardList);
+		model.addAttribute("testBoardCnt", testBoardCnt);
 		return "egovframework/test/board/testBoardList";
 	}
 
-	// 상세 게시글 불러오기 ( + 댓글 리스트 불러오기 )
+	// 상세 게시글 불러오기
 	@RequestMapping(value="/test/board/selectTestBoardDetail.do", method=RequestMethod.GET)
 	public String selectTestBoardDetail(HttpServletRequest request, @ModelAttribute("testBoardVO") TestBoardVO vo, @ModelAttribute("testCommentVO") TestCommentVO testCommentVo, ModelMap model) throws Exception {
 		EgovMap testBoardDetail = testBoardService.selectTestBoardDetail(vo);
-		model.addAttribute("testBoardDetail", testBoardDetail);
-		
+		// 조회수 + 1 증가 ==> 1만 증가되도록 설정해보기
+		testBoardService.updateTestBoardViews(vo);
+		model.addAttribute("testBoardDetail", testBoardDetail);		
+		// 댓글
+		int commentCnt = testBoardService.selectTestCommentCnt(testCommentVo);
+		model.addAttribute("commentCnt", commentCnt);
 		List<TestCommentVO> testCommentList = testBoardService.selectTestCommentList(testCommentVo);
 		model.addAttribute("testCommentList", testCommentList);
 		return "egovframework/test/board/testBoardDetail";
@@ -92,13 +98,22 @@ public class TestBoardController {
 		return "redirect:/test/board/selectBoardList.do";
 	}
 	
+	// 게시물 추천
+	@RequestMapping(value="/test/board/inserTestBoardCommend.do", method=RequestMethod.POST)
+	public String inserTestBoardCommend(HttpServletRequest request, @ModelAttribute("testBoardCommendVO") TestBoardCommendVO testBoardCommendVO, TestBoardVO vo, ModelMap Model) throws Exception {
+		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		// 추천 여부 확인하기
+		testBoardCommendVO.setEmplyrId(user.getId());
+		testBoardCommendVO.setBoardId(vo.getBoardId());
+		List<TestBoardCommendVO> checkTestBoardCommend = testBoardService.selectCheckTestBoardCommend(testBoardCommendVO);
+		if(checkTestBoardCommend == null) {
+			testBoardService.insertTestBoardCommend(testBoardCommendVO);
+		}
+		
+		return "jsonView";
+	}
 	
-/* ------------------------------------------------ 게시판 끝 ------------------------------------------------ */
-	
-	
-/* ------------------------------------------------ 댓글 ajax ------------------------------------------------ */
-	
-	
+	/* 댓글 ajax */
 	// 댓글 등록
 	@RequestMapping(value="/test/board/insertTestComment.do", method=RequestMethod.POST)
 	public String inserTestComment(HttpServletRequest request, @ModelAttribute("testCommentVO") TestCommentVO testCommentVo, ModelMap Model) throws Exception {
@@ -128,7 +143,4 @@ public class TestBoardController {
 		testBoardService.deleteTestComment(testCommentVo);
 		return "jsonView";
 	}
-	
-/* ------------------------------------------------ 댓글 ajax 끝 ------------------------------------------------ */
-		
 }
